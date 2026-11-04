@@ -629,6 +629,7 @@ export const en: Record<string, string> = {
   "Von dir gesperrt – du kannst bearbeiten": "Locked by you – you can edit",
   "Gesperrt von {user} seit {since} – nur lesen": "Locked by {user} since {since} – read only",
   "Nicht gesperrt – nur lesen. Zum Bearbeiten erst sperren.": "Not locked – read only. Lock it to edit.",
+  "Nur lesen – deine Rolle in diesem Projekt erlaubt kein Bearbeiten.": "Read only – your role in this project does not allow editing.",
   "Sperren": "Lock",
   "Zentrale": "Central server",
   "Verbunden mit {url} (Version {version})": "Connected to {url} (version {version})",
@@ -852,4 +853,10 @@ export const en: Record<string, string> = {
   "{n} Platzhalter brechen bei dbt run ab": "{n} placeholder(s) fail in dbt run",
   "dbt-Projekt nach {target} geschrieben: {n} Datei(en)": "dbt project written to {target}: {n} file(s)",
   "{n} Hinweis(e) – Platzhalter brechen bei dbt run ab": "{n} note(s) – placeholders fail in dbt run",
+  "Hier und auf der Zentrale geändert. Übernimm den Stand der Zentrale – deine Fassung bleibt als Version in der Historie und lässt sich dort vergleichen oder wiederherstellen.": "Changed here and on the central server. Take the central version – yours stays as a version in the history, where you can compare or restore it.",
+  "Stand der Zentrale übernehmen": "Take central version",
+  "Stand der Zentrale übernommen – deine Fassung ist Version {version} in der Historie": "Central version taken – yours is version {version} in the history",
+  "Konflikt: hier und auf der Zentrale geändert – {files}": "Conflict: changed here and on the central server – {files}",
+  "Erst auflösen: KyubiREPO → Zentrale → „Stand der Zentrale übernehmen“ (deine Fassung bleibt in der Historie).": "Resolve first: KyubiREPO → Central → “Take central version” (yours stays in the history).",
+  "Zu KyubiREPO": "Open KyubiREPO",
 };
