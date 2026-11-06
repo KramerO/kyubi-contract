@@ -33,5 +33,7 @@ export function fmtNumber(n: number): string {
 export function fmtDateTime(iso: string | null | undefined): string {
   if (!iso) return "";
   const d = new Date(iso);
-  return Number.isNaN(d.getTime()) ? iso : d.toLocaleString(locale(), { dateStyle: "short", timeStyle: "medium" });
+  // Englisch mit Monatsnamen statt 06/11 (mehrdeutig für US-Leser, UX-Review N9)
+  const dateStyle = locale().startsWith("en") ? "medium" : "short";
+  return Number.isNaN(d.getTime()) ? iso : d.toLocaleString(locale(), { dateStyle, timeStyle: "medium" });
 }
