@@ -911,4 +911,13 @@ export const en: Record<string, string> = {
   "Eigene Fassung vor Übernahme der Zentrale: {files}": "Own version before taking the central one: {files}",
   "Erst eine Datei angeben": "Enter a file first",
   "Ziehen oder Enter fügt ein · Ports verbinden · Entf löscht": "Drag or press Enter to add · connect ports · Delete removes",
+  "Änderung wiederhergestellt": "Change restored",
+  "Bereich": "Area",
+  "Log": "Log",
+  "Wiederholen": "Redo",
+  "oder ⌘/Strg+Umschalt+Z": "or ⌘/Ctrl+Shift+Z",
+  "Gleicher Ort wie {name} ({kind}) – Lineage kann dort stehen.": "Same location as {name} ({kind}) – lineage may be there.",
+  "Öffnen": "Open",
+  "Datei wählen…": "Choose file…",
+  "Keine Datei gewählt": "No file chosen",
 };
