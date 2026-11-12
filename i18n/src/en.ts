@@ -925,4 +925,12 @@ export const en: Record<string, string> = {
   "Öffnen": "Open",
   "Datei wählen…": "Choose file…",
   "Keine Datei gewählt": "No file chosen",
+  "KI-Assistent": "AI assistant",
+  "Prüfe KI-Provider…": "Checking AI provider…",
+  "Ollama verbunden ({host}) – Modelle: {models}": "Ollama connected ({host}) – models: {models}",
+  "KI-Provider offline ({host}) – läuft `ollama serve`?": "AI provider offline ({host}) – is `ollama serve` running?",
+  "Frag den Assistenten z. B.: „Baue einen Graph: CSV lesen, filtern, Parquet schreiben“. Änderungen erscheinen als Vorschlag zum Annehmen.": "Ask the assistant e.g.: “Build a graph: read CSV, filter, write Parquet”. Changes appear as a proposal to accept.",
+  "Assistent denkt…": "Assistant is thinking…",
+  "Nachricht an den KI-Assistenten…": "Message to the AI assistant…",
+  "(abgelehnt)": "(rejected)",
 };
