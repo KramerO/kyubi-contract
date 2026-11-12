@@ -161,6 +161,11 @@ export const en: Record<string, string> = {
   "gesendet": "sent",
   "wartet": "waiting",
   "Benachrichtigungen": "Notifications",
+  "Laufende Graphläufe": "Graph runs in progress",
+  "Lauf {id}": "Run {id}",
+  "von {user}": "by {user}",
+  "Nutzer unbekannt": "user unknown",
+  "seit {time}": "since {time}",
   // Designer: Eigenschaften, Eingaben
   "Keine Parameter.": "No parameters.",
   "„Bearbeiten“ einschalten, um Werte zu ändern.": "Turn on “Edit” to change values.",
