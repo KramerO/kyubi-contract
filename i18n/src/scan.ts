@@ -54,9 +54,11 @@ export function untranslated(file: string, source: string): Finding[] {
 
 /** Texte, die in beiden Sprachen gleich bleiben (Produktnamen, Formate, Kürzel). */
 export const KEEP = new Set([
-  "Kyubi", "Kyubi-ETL", "KyubiDagDesigner", "KyubiControl", "KyubiMapper", "KyubiMetaDataWarehouse", "KyubiHUB", "KyubiREPO", "KyubiSERVICE", "YAML",
+  "Kyubi", "Kyubi-ETL", "KyubiDagDesigner", "KyubiControl", "KyubiMapper", "KyubiMetaDataWarehouse", "KyubiKeyStore", "KyubiHUB", "KyubiREPO", "KyubiSERVICE", "YAML",
   "Python", "JSON", "CSV", "Parquet", "SQL", "OK", "ID", "Deutsch", "English", "SLA", "NAME",
    "KyubiHUB", "⌂ KyubiHUB", "Port", "Schema", "*", "?",
   // TypeScript-Typen in Generics (Promise<…>), keine sichtbaren Texte
   "Promise", "Record", "Map", "Set", "Array", "Partial", "Readonly",
+  // Beispielwerte in Platzhaltern des KyubiKeyStore – Bezeichner, keine Sätze
+  "customer_pii", "user:anna", "key_id", "email", "kks1:…",
 ]);
