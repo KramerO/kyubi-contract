@@ -981,4 +981,9 @@ export const en: Record<string, string> = {
   "ja": "yes",
   "NEIN": "NO",
   "Noch keine Einträge.": "No entries yet.",
+  "versiegelt": "sealed",
+  "Versiegelt: die Ladestrecke kann verschlüsseln, aber nicht lesen": "Sealed: the loading pipeline can encrypt but not read",
+  "Versiegelt: Verschlüsselt wird für den öffentlichen Schlüssel des Bunds. Lesen kann nur, wer den privaten Leseschlüssel hat – die Ladestrecke hat ihn nicht. Jeder Datensatz wird genau einmal verschlüsselt, und die Komponenten encrypt/decrypt arbeiten nicht mit versiegelten Bünden.": "Sealed: encryption uses the keyring's public key. Only someone with the private reading key can read – the loading pipeline does not have it. Each record is encrypted exactly once, and the components encrypt/decrypt do not work with sealed keyrings.",
+  "versiegelt – die Ladestrecke kann nicht lesen": "sealed – the loading pipeline cannot read",
+  "Versiegelt: KYUBI_SECRET_KKS_<BUND> muss der **private Leseschlüssel** sein (kyubi keystore newkey --reading). Die Ladestrecke braucht später nur KYUBI_SECRET_KKS_<BUND>_INDEX und kann damit verschlüsseln, aber nicht lesen.": "Sealed: KYUBI_SECRET_KKS_<KEYRING> has to be the **private reading key** (kyubi keystore newkey --reading). Later the pipeline only needs KYUBI_SECRET_KKS_<KEYRING>_INDEX and can encrypt with it, but not read.",
 };
