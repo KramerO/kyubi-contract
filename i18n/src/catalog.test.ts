@@ -9,7 +9,7 @@ import { calls, untranslated, type Finding } from "./scan";
 import { translate } from "./translate";
 
 const APPS = fileURLToPath(new URL("../../..", import.meta.url));
-const DIRS = ["designer", "controlcenter", "mapper", "metahub", "hub", "repo", "service", "docs",
+const DIRS = ["designer", "controlcenter", "mapper", "metahub", "keystore", "hub", "repo", "service", "docs",
   "shared/client", "shared/ui", "shared/graph-canvas", "shared/i18n"].map((d) => `${d}/src`);
 // Ausnahmen: Dateien, deren Texte (noch) nicht übersetzt werden – derzeit keine
 const PENDING = new Set<string>([]);

@@ -17,7 +17,7 @@ function imports(dir: string): [string, string][] {
 
 describe("Paketgrenzen", () => {
   it("findet alle Apps und gemeinsamen Pakete", () => {
-    expect(APP_NAMES).toEqual(expect.arrayContaining(["designer", "controlcenter", "mapper", "metahub", "hub", "repo", "service", "docs"]));
+    expect(APP_NAMES).toEqual(expect.arrayContaining(["designer", "controlcenter", "mapper", "metahub", "keystore", "hub", "repo", "service", "docs"]));
     expect(SHARED).toEqual(expect.arrayContaining(["client", "graph-canvas", "i18n", "ui"]));
   });
 
