@@ -62,6 +62,8 @@ export const en: Record<string, string> = {
   "Auswahl ausführen": "Run selection",
   "Als Komponente speichern…": "Save as component…",
   "Kein Graph gewählt": "No graph selected",
+  "Geöffnete Graphen": "Open graphs",
+  "Reiter {name} schließen": "Close tab {name}",
   "Neues Mapping": "New mapping",
   "Anlegen und einhängen": "Create and attach",
   "Eingabe {input} → Ausgabe {output}; Felder gleichen Namens werden vorbelegt.": "Input {input} → output {output}; fields with the same name are pre-filled.",
