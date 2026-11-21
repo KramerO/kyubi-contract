@@ -1198,5 +1198,15 @@
   "YAML-Syntaxfehler: {}": "YAML syntax error: {}",
   "Zeichen {} ist in der Kodierung '{}' nicht darstellbar – Format mit encoding: utf-8 verwenden oder das Zeichen vorher ersetzen": "Character {} cannot be represented in encoding '{}' – use a format with encoding: utf-8 or replace the character first",
   "Die Eingabe einer Operation muss ein Objekt aus Name-Wert-Paaren sein": "The input of an operation must be an object of name-value pairs",
-  "Argumente als JSON-Objekt übergeben, z. B. {\"name\": \"…\"}": "Pass the arguments as a JSON object, e.g. {\"name\": \"…\"}"
+  "Argumente als JSON-Objekt übergeben, z. B. {\"name\": \"…\"}": "Pass the arguments as a JSON object, e.g. {\"name\": \"…\"}",
+  "App '{}' unbekannt": "App '{}' is unknown",
+  "Bekannt: {}": "Known: {}",
+  "App '{}' ist nicht lizenziert (KY3803)": "App '{}' is not licensed (KY3803)",
+  "Einem anderen Nutzer die App entziehen (kyubi server user apps) oder die Lizenz erweitern": "Remove the app from another user (kyubi server user apps) or extend the license",
+  "Keine freien Plätze für '{}': {} von {} belegt (KY3803)": "No free seats for '{}': {} of {} in use (KY3803)",
+  "Lizenz erweitern (kyubi license show nennt die lizenzierten Apps)": "Extend the license (kyubi license show lists the licensed apps)",
+  "Der Widerrufsdienst ist auf dieser Zentrale nicht eingeschaltet": "The revocation service is not enabled on this central server",
+  "Nur die Hersteller-Instanz bietet ihn an ({}=1)": "Only the vendor instance offers it ({}=1)",
+  "Rolle admin nötig": "Role admin required",
+  "Zu viele Anfragen": "Too many requests"
 }
