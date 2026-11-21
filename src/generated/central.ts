@@ -65,6 +65,7 @@ export interface HTTPValidationError {
 export interface LicenseInfo {
   apps?: Record<string, number>;
   compute?: Record<string, number>;
+  cores_allowed?: number | null;
   customer?: string | null;
   days_left?: number | null;
   expires?: string | null;
