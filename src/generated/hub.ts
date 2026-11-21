@@ -84,6 +84,21 @@ export interface HubProjectRow {
   url: string;
 }
 
+export interface LicenseInfo {
+  apps?: Record<string, number>;
+  compute?: Record<string, number>;
+  cores_allowed?: number | null;
+  customer?: string | null;
+  days_left?: number | null;
+  expires?: string | null;
+  grace_ends?: string | null;
+  id?: string | null;
+  installed: boolean;
+  problem?: string | null;
+  state?: string | null;
+  valid: boolean;
+}
+
 export interface Login {
   oidc?: boolean;
   password?: string | null;

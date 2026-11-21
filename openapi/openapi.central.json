@@ -220,6 +220,21 @@
       },
       "ChangeUser": {
         "properties": {
+          "apps": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Apps ersetzen (je ein Platz)",
+            "title": "Apps"
+          },
           "disabled": {
             "anyOf": [
               {
@@ -263,6 +278,33 @@
         "title": "ChangeUser",
         "type": "object"
       },
+      "Check": {
+        "properties": {
+          "license_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "License Id",
+            "type": "string"
+          },
+          "server_id": {
+            "anyOf": [
+              {
+                "maxLength": 128,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Server Id"
+          }
+        },
+        "required": [
+          "license_id"
+        ],
+        "title": "Check",
+        "type": "object"
+      },
       "Exchange": {
         "properties": {
           "code": {
@@ -294,6 +336,135 @@
           }
         },
         "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "LicenseInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "apps": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "App → lizenzierte Plätze",
+            "title": "Apps",
+            "type": "object"
+          },
+          "compute": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "Einheit → Kontingent",
+            "title": "Compute",
+            "type": "object"
+          },
+          "cores_allowed": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "gedrosselt auf so viele Kerne (Rechenkontingent); null = keine",
+            "title": "Cores Allowed"
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer"
+          },
+          "days_left": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "bis zum Ablauf; danach negativ",
+            "title": "Days Left"
+          },
+          "expires": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires"
+          },
+          "grace_ends": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Ende der Karenz; danach nur lesen",
+            "title": "Grace Ends"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "installed": {
+            "description": "false: keine Lizenz, keine Einschränkung",
+            "title": "Installed",
+            "type": "boolean"
+          },
+          "problem": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Problem"
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "valid | warning | grace | read_only",
+            "title": "State"
+          },
+          "valid": {
+            "description": "false: Lizenz vorhanden, aber nicht prüfbar (siehe problem)",
+            "title": "Valid",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "installed",
+          "valid"
+        ],
+        "title": "LicenseInfo",
         "type": "object"
       },
       "LockList": {
@@ -524,6 +695,14 @@
             "default": false,
             "title": "Admin",
             "type": "boolean"
+          },
+          "apps": {
+            "description": "zugewiesene Apps (je ein Platz)",
+            "items": {
+              "type": "string"
+            },
+            "title": "Apps",
+            "type": "array"
           },
           "display": {
             "anyOf": [
@@ -793,6 +972,84 @@
         "title": "PushResult",
         "type": "object"
       },
+      "RevocationAnswer": {
+        "additionalProperties": false,
+        "properties": {
+          "revoked": {
+            "description": "true: die Lizenz ist widerrufen",
+            "title": "Revoked",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "revoked"
+        ],
+        "title": "RevocationAnswer",
+        "type": "object"
+      },
+      "RevocationEntry": {
+        "additionalProperties": false,
+        "properties": {
+          "license_id": {
+            "title": "License Id",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "revoked": {
+            "description": "Zeitpunkt des Widerrufs (ISO)",
+            "title": "Revoked",
+            "type": "string"
+          }
+        },
+        "required": [
+          "license_id",
+          "reason",
+          "revoked"
+        ],
+        "title": "RevocationEntry",
+        "type": "object"
+      },
+      "RevocationList": {
+        "additionalProperties": false,
+        "properties": {
+          "revoked": {
+            "items": {
+              "$ref": "#/components/schemas/RevocationEntry"
+            },
+            "title": "Revoked",
+            "type": "array"
+          }
+        },
+        "required": [
+          "revoked"
+        ],
+        "title": "RevocationList",
+        "type": "object"
+      },
+      "Revoke": {
+        "properties": {
+          "license_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "License Id",
+            "type": "string"
+          },
+          "reason": {
+            "default": "",
+            "maxLength": 500,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "license_id"
+        ],
+        "title": "Revoke",
+        "type": "object"
+      },
       "TokenCreated": {
         "additionalProperties": false,
         "properties": {
@@ -885,6 +1142,14 @@
       "UserOut": {
         "additionalProperties": false,
         "properties": {
+          "apps": {
+            "description": "zugewiesene Apps; jede belegt einen Platz (D-217)",
+            "items": {
+              "type": "string"
+            },
+            "title": "Apps",
+            "type": "array"
+          },
           "disabled": {
             "title": "Disabled",
             "type": "boolean"
@@ -916,7 +1181,8 @@
           "name",
           "display",
           "disabled",
-          "roles"
+          "roles",
+          "apps"
         ],
         "title": "UserOut",
         "type": "object"
@@ -1330,6 +1596,155 @@
           }
         },
         "summary": "Info"
+      }
+    },
+    "/api/license": {
+      "get": {
+        "operationId": "license_state_api_license_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LicenseInfo"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "License State"
+      }
+    },
+    "/api/license/check": {
+      "post": {
+        "operationId": "check_api_license_check_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Check"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevocationAnswer"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Check"
+      }
+    },
+    "/api/license/revocations": {
+      "get": {
+        "operationId": "listing_api_license_revocations_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevocationList"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Listing"
+      },
+      "post": {
+        "operationId": "revoke_api_license_revocations_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Revoke"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevocationEntry"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Revoke"
+      }
+    },
+    "/api/license/revocations/{license_id}": {
+      "delete": {
+        "operationId": "restore_api_license_revocations__license_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "license_id",
+            "required": true,
+            "schema": {
+              "title": "License Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevocationAnswer"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Restore"
       }
     },
     "/api/login": {

@@ -47,9 +47,15 @@ export interface CentralInfo {
 }
 
 export interface ChangeUser {
+  apps?: string[] | null;
   disabled?: boolean | null;
   display?: string | null;
   roles?: Record<string, string | null>;
+}
+
+export interface Check {
+  license_id: string;
+  server_id?: string | null;
 }
 
 export interface Exchange {
@@ -59,6 +65,21 @@ export interface Exchange {
 
 export interface HTTPValidationError {
   detail?: ValidationError[];
+}
+
+export interface LicenseInfo {
+  apps?: Record<string, number>;
+  compute?: Record<string, number>;
+  cores_allowed?: number | null;
+  customer?: string | null;
+  days_left?: number | null;
+  expires?: string | null;
+  grace_ends?: string | null;
+  id?: string | null;
+  installed: boolean;
+  problem?: string | null;
+  state?: string | null;
+  valid: boolean;
 }
 
 export interface LockList {
@@ -115,6 +136,7 @@ export interface NewToken {
 
 export interface NewUser {
   admin?: boolean;
+  apps?: string[];
   display?: string | null;
   name: string;
   password?: string | null;
@@ -169,6 +191,25 @@ export interface PushResult {
   version: number;
 }
 
+export interface RevocationAnswer {
+  revoked: boolean;
+}
+
+export interface RevocationEntry {
+  license_id: string;
+  reason: string;
+  revoked: string;
+}
+
+export interface RevocationList {
+  revoked: RevocationEntry[];
+}
+
+export interface Revoke {
+  license_id: string;
+  reason?: string;
+}
+
 export interface TokenCreated {
   label: string;
   token: string;
@@ -190,6 +231,7 @@ export interface UserList {
 }
 
 export interface UserOut {
+  apps: string[];
   disabled: boolean;
   display: string | null;
   name: string;
