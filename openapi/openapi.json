@@ -1,6 +1,188 @@
 {
   "components": {
     "schemas": {
+      "Breadcrumb": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "label"
+        ],
+        "title": "Breadcrumb",
+        "type": "object"
+      },
+      "CanvasNote": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "position": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Position",
+            "type": "array"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "position"
+        ],
+        "title": "CanvasNote",
+        "type": "object"
+      },
+      "CatalogEntry": {
+        "additionalProperties": false,
+        "properties": {
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "description_en": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description En"
+          },
+          "icon": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon"
+          },
+          "inputs": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogInput"
+            },
+            "title": "Inputs",
+            "type": "array"
+          },
+          "origin": {
+            "description": "project | native",
+            "title": "Origin",
+            "type": "string"
+          },
+          "outputs": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogOutput"
+            },
+            "title": "Outputs",
+            "type": "array"
+          },
+          "parameters": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Parameters",
+            "type": "array"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "origin",
+          "category",
+          "icon",
+          "description",
+          "description_en",
+          "inputs",
+          "outputs",
+          "parameters"
+        ],
+        "title": "CatalogEntry",
+        "type": "object"
+      },
+      "CatalogInput": {
+        "additionalProperties": false,
+        "properties": {
+          "multi": {
+            "title": "Multi",
+            "type": "boolean"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "optional": {
+            "title": "Optional",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "multi",
+          "optional"
+        ],
+        "title": "CatalogInput",
+        "type": "object"
+      },
+      "CatalogOutput": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "optional": {
+            "title": "Optional",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "optional"
+        ],
+        "title": "CatalogOutput",
+        "type": "object"
+      },
       "ChangesetResult": {
         "description": "Ergebnis einer Folge von Operationen.",
         "properties": {
@@ -181,6 +363,86 @@
         "title": "Diagnostic",
         "type": "object"
       },
+      "DiagnosticOut": {
+        "additionalProperties": false,
+        "description": "Meldung zu einer Stelle in einer Nutzerdatei (nur gesetzte Felder erscheinen).",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "col": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Col"
+          },
+          "file": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File"
+          },
+          "hint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hint"
+          },
+          "line": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path"
+          },
+          "severity": {
+            "title": "Severity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "severity",
+          "message"
+        ],
+        "title": "DiagnosticOut",
+        "type": "object"
+      },
       "ExportBody": {
         "properties": {
           "graphs": {
@@ -202,6 +464,426 @@
           }
         },
         "title": "ExportBody",
+        "type": "object"
+      },
+      "GraphEdge": {
+        "additionalProperties": false,
+        "properties": {
+          "checkpoint": {
+            "title": "Checkpoint",
+            "type": "boolean"
+          },
+          "descending": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Descending"
+          },
+          "diagnostics": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticOut"
+            },
+            "title": "Diagnostics",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "partitions": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "nur bei parallelen Enden",
+            "title": "Partitions"
+          },
+          "route": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Route"
+          },
+          "route_keys": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Route Keys"
+          },
+          "schema": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Schema"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          },
+          "source_port": {
+            "title": "Source Port",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "type": "string"
+          },
+          "target_port": {
+            "title": "Target Port",
+            "type": "string"
+          },
+          "viewer": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Viewer"
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "source_port",
+          "target",
+          "target_port",
+          "schema",
+          "status",
+          "diagnostics",
+          "checkpoint",
+          "viewer"
+        ],
+        "title": "GraphEdge",
+        "type": "object"
+      },
+      "GraphNode": {
+        "additionalProperties": false,
+        "properties": {
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "composite": {
+            "title": "Composite",
+            "type": "boolean"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "diagnostics": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticOut"
+            },
+            "title": "Diagnostics",
+            "type": "array"
+          },
+          "group": {
+            "title": "Group"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "inputs": {
+            "items": {
+              "$ref": "#/components/schemas/NodePort"
+            },
+            "title": "Inputs",
+            "type": "array"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "layout": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Layout"
+          },
+          "outputs": {
+            "items": {
+              "$ref": "#/components/schemas/NodePort"
+            },
+            "title": "Outputs",
+            "type": "array"
+          },
+          "params": {
+            "additionalProperties": true,
+            "title": "Params",
+            "type": "object"
+          },
+          "partitions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Partitions"
+          },
+          "phase": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phase"
+          },
+          "position": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Position",
+            "type": "array"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "template_params": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Template Params"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "type",
+          "category",
+          "description",
+          "params",
+          "template_params",
+          "position",
+          "composite",
+          "group",
+          "phase",
+          "partitions",
+          "layout",
+          "inputs",
+          "outputs",
+          "status",
+          "diagnostics"
+        ],
+        "title": "GraphNode",
+        "type": "object"
+      },
+      "GraphView": {
+        "additionalProperties": false,
+        "properties": {
+          "breadcrumb": {
+            "items": {
+              "$ref": "#/components/schemas/Breadcrumb"
+            },
+            "title": "Breadcrumb",
+            "type": "array"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "diagnostics": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticOut"
+            },
+            "title": "Diagnostics",
+            "type": "array"
+          },
+          "edges": {
+            "items": {
+              "$ref": "#/components/schemas/GraphEdge"
+            },
+            "title": "Edges",
+            "type": "array"
+          },
+          "inside": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inside"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "nodes": {
+            "items": {
+              "$ref": "#/components/schemas/GraphNode"
+            },
+            "title": "Nodes",
+            "type": "array"
+          },
+          "notes": {
+            "items": {
+              "$ref": "#/components/schemas/CanvasNote"
+            },
+            "title": "Notes",
+            "type": "array"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          },
+          "package": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Package"
+          },
+          "parameters": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Parameters",
+            "type": "array"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path"
+          },
+          "phase_count": {
+            "title": "Phase Count",
+            "type": "integer"
+          },
+          "readonly": {
+            "title": "Readonly",
+            "type": "boolean"
+          },
+          "sandbox": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sandbox"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "path",
+          "parameters",
+          "inside",
+          "breadcrumb",
+          "phase_count",
+          "notes",
+          "package",
+          "readonly",
+          "sandbox",
+          "nodes",
+          "edges",
+          "diagnostics",
+          "ok"
+        ],
+        "title": "GraphView",
         "type": "object"
       },
       "HTTPValidationError": {
@@ -259,6 +941,54 @@
           }
         },
         "title": "Login",
+        "type": "object"
+      },
+      "NodePort": {
+        "additionalProperties": false,
+        "properties": {
+          "connected": {
+            "title": "Connected",
+            "type": "boolean"
+          },
+          "multi": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "nur bei Eingängen",
+            "title": "Multi"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "optional": {
+            "title": "Optional",
+            "type": "boolean"
+          },
+          "schema": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Schema"
+          }
+        },
+        "required": [
+          "name",
+          "optional",
+          "connected",
+          "schema"
+        ],
+        "title": "NodePort",
         "type": "object"
       },
       "OpResult": {
@@ -392,6 +1122,176 @@
         "title": "PreviewInput",
         "type": "object"
       },
+      "ProjectObject": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path"
+          },
+          "readonly": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Readonly"
+          },
+          "sandbox": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "nur bei eingebundenen Objekten",
+            "title": "Sandbox"
+          },
+          "shadowed": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shadowed"
+          }
+        },
+        "required": [
+          "name",
+          "path",
+          "description"
+        ],
+        "title": "ProjectObject",
+        "type": "object"
+      },
+      "ProjectView": {
+        "additionalProperties": false,
+        "properties": {
+          "default_profile": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Default Profile"
+          },
+          "diagnostics": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticOut"
+            },
+            "title": "Diagnostics",
+            "type": "array"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "objects": {
+            "additionalProperties": {
+              "items": {
+                "$ref": "#/components/schemas/ProjectObject"
+              },
+              "type": "array"
+            },
+            "title": "Objects",
+            "type": "object"
+          },
+          "projects": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Projects",
+            "type": "array"
+          },
+          "root": {
+            "title": "Root",
+            "type": "string"
+          },
+          "sandboxes": {
+            "items": {
+              "$ref": "#/components/schemas/SandboxInfo"
+            },
+            "title": "Sandboxes",
+            "type": "array"
+          },
+          "segment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Segment"
+          },
+          "uses": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Uses",
+            "type": "array"
+          },
+          "workspace": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Workspace"
+          }
+        },
+        "required": [
+          "name",
+          "root",
+          "workspace",
+          "segment",
+          "uses",
+          "projects",
+          "sandboxes",
+          "default_profile",
+          "objects",
+          "diagnostics"
+        ],
+        "title": "ProjectView",
+        "type": "object"
+      },
       "Push": {
         "properties": {
           "message": {
@@ -422,6 +1322,30 @@
           }
         },
         "title": "Push",
+        "type": "object"
+      },
+      "SandboxInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "alias": {
+            "title": "Alias",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "objects": {
+            "title": "Objects",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "alias",
+          "name",
+          "objects"
+        ],
+        "title": "SandboxInfo",
         "type": "object"
       },
       "Severity": {
@@ -647,8 +1571,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "additionalProperties": true,
-                    "type": "object"
+                    "$ref": "#/components/schemas/CatalogEntry"
                   },
                   "title": "Response Catalog Api Catalog Get",
                   "type": "array"
@@ -790,9 +1713,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Graph Api Graphs  Name  View Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/GraphView"
                 }
               }
             },
@@ -1141,9 +2062,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Project Api Project Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/ProjectView"
                 }
               }
             },
