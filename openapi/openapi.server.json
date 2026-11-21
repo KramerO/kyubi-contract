@@ -3661,8 +3661,16 @@
             ]
           },
           "name": {
-            "title": "Name",
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Listenelemente haben keinen Namen",
+            "title": "Name"
           },
           "nullable": {
             "title": "Nullable",
@@ -3694,34 +3702,63 @@
       },
       "Snippet": {
         "additionalProperties": false,
+        "description": "Code-Snippet; projekteigene Snippets haben keine englischen Texte (Felder fehlen dann).",
         "properties": {
           "category": {
             "title": "Category",
             "type": "string"
           },
           "category_en": {
-            "title": "Category En",
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category En"
           },
           "code": {
             "title": "Code",
             "type": "string"
           },
           "description": {
-            "title": "Description",
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
           },
           "description_en": {
-            "title": "Description En",
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description En"
           },
           "name": {
             "title": "Name",
             "type": "string"
           },
           "name_en": {
-            "title": "Name En",
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name En"
           },
           "origin": {
             "title": "Origin",
@@ -3741,11 +3778,8 @@
         },
         "required": [
           "name",
-          "name_en",
           "category",
-          "category_en",
           "description",
-          "description_en",
           "code",
           "origin",
           "problem"
