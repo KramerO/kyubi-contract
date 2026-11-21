@@ -1955,6 +1955,123 @@
         "title": "LastInstance",
         "type": "object"
       },
+      "LicenseInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "apps": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "App → lizenzierte Plätze",
+            "title": "Apps",
+            "type": "object"
+          },
+          "compute": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "Einheit → Kontingent",
+            "title": "Compute",
+            "type": "object"
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer"
+          },
+          "days_left": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "bis zum Ablauf; danach negativ",
+            "title": "Days Left"
+          },
+          "expires": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires"
+          },
+          "grace_ends": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Ende der Karenz; danach nur lesen",
+            "title": "Grace Ends"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "installed": {
+            "description": "false: keine Lizenz, keine Einschränkung",
+            "title": "Installed",
+            "type": "boolean"
+          },
+          "problem": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Problem"
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "valid | warning | grace | read_only",
+            "title": "State"
+          },
+          "valid": {
+            "description": "false: Lizenz vorhanden, aber nicht prüfbar (siehe problem)",
+            "title": "Valid",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "installed",
+          "valid"
+        ],
+        "title": "LicenseInfo",
+        "type": "object"
+      },
       "Login": {
         "properties": {
           "oidc": {
@@ -4430,6 +4547,25 @@
           }
         },
         "summary": "Health"
+      }
+    },
+    "/api/license": {
+      "get": {
+        "description": "Zustand der Lizenz dieser Installation (D-217).",
+        "operationId": "license_state_api_license_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LicenseInfo"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "License State"
       }
     },
     "/api/mapper/snippets": {

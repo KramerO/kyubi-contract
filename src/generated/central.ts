@@ -62,6 +62,20 @@ export interface HTTPValidationError {
   detail?: ValidationError[];
 }
 
+export interface LicenseInfo {
+  apps?: Record<string, number>;
+  compute?: Record<string, number>;
+  customer?: string | null;
+  days_left?: number | null;
+  expires?: string | null;
+  grace_ends?: string | null;
+  id?: string | null;
+  installed: boolean;
+  problem?: string | null;
+  state?: string | null;
+  valid: boolean;
+}
+
 export interface LockList {
   locks: LockOut[];
 }
