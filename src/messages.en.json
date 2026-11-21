@@ -1200,5 +1200,9 @@
   "Die Eingabe einer Operation muss ein Objekt aus Name-Wert-Paaren sein": "The input of an operation must be an object of name-value pairs",
   "Argumente als JSON-Objekt übergeben, z. B. {\"name\": \"…\"}": "Pass the arguments as a JSON object, e.g. {\"name\": \"…\"}",
   "App '{}' unbekannt": "App '{}' is unknown",
-  "Bekannt: {}": "Known: {}"
+  "Bekannt: {}": "Known: {}",
+  "App '{}' ist nicht lizenziert (KY3803)": "App '{}' is not licensed (KY3803)",
+  "Einem anderen Nutzer die App entziehen (kyubi server user apps) oder die Lizenz erweitern": "Remove the app from another user (kyubi server user apps) or extend the license",
+  "Keine freien Plätze für '{}': {} von {} belegt (KY3803)": "No free seats for '{}': {} of {} in use (KY3803)",
+  "Lizenz erweitern (kyubi license show nennt die lizenzierten Apps)": "Extend the license (kyubi license show lists the licensed apps)"
 }
