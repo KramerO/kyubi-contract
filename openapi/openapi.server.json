@@ -50,6 +50,54 @@
         "title": "AiStatus",
         "type": "object"
       },
+      "ApiVersion": {
+        "additionalProperties": false,
+        "description": "Version des Servers. Gleiche ``major`` = kompatibel, ``minor`` und ``patch`` sind frei.",
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/Capabilities"
+          },
+          "major": {
+            "title": "Major",
+            "type": "integer"
+          },
+          "minor": {
+            "title": "Minor",
+            "type": "integer"
+          },
+          "patch": {
+            "title": "Patch",
+            "type": "integer"
+          },
+          "prerelease": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Rest nach der Patch-Nummer, z. B. .dev0",
+            "title": "Prerelease"
+          },
+          "version": {
+            "description": "vollständige Version, z. B. 2.4.6 oder 0.1.0.dev0",
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "major",
+          "minor",
+          "patch",
+          "prerelease",
+          "capabilities"
+        ],
+        "title": "ApiVersion",
+        "type": "object"
+      },
       "AttemptRow": {
         "additionalProperties": false,
         "properties": {
@@ -166,6 +214,43 @@
           "position"
         ],
         "title": "CanvasNote",
+        "type": "object"
+      },
+      "Capabilities": {
+        "additionalProperties": false,
+        "description": "Was dieser Server kann: Clients zeigen nur Vorhandenes an (progressive enhancement).",
+        "properties": {
+          "apps": {
+            "description": "Schlüssel der registrierten Apps",
+            "items": {
+              "type": "string"
+            },
+            "title": "Apps",
+            "type": "array"
+          },
+          "components": {
+            "description": "eingebaute Komponententypen",
+            "items": {
+              "type": "string"
+            },
+            "title": "Components",
+            "type": "array"
+          },
+          "operations": {
+            "description": "Namen der Operationen (kyubi.ops)",
+            "items": {
+              "type": "string"
+            },
+            "title": "Operations",
+            "type": "array"
+          }
+        },
+        "required": [
+          "apps",
+          "operations",
+          "components"
+        ],
+        "title": "Capabilities",
         "type": "object"
       },
       "CatalogEntry": {
@@ -5902,6 +5987,25 @@
           }
         },
         "summary": "Scheduler Stop"
+      }
+    },
+    "/api/version": {
+      "get": {
+        "description": "Version und Fähigkeiten – Apps prüfen den Major (D-215).",
+        "operationId": "version_api_version_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiVersion"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Version"
       }
     }
   }
