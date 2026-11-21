@@ -1,0 +1,21 @@
+{
+  "name": "@kyubi/contract",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Vertrag zwischen Server und Apps: erzeugte API-Typen und Nachrichtenkatalog (D-214, D-215)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/generated/server.ts",
+    "./hub": "./src/generated/hub.ts",
+    "./central": "./src/generated/central.ts",
+    "./messages.en.json": "./src/messages.en.json"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
