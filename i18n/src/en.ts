@@ -891,6 +891,7 @@ export const en: Record<string, string> = {
   "Keine Verbindung zum Kyubi-Server": "No connection to the Kyubi server",
   "Läuft der Hub noch? Nach dem Neustart die Seite neu laden.": "Is the hub still running? Reload the page after restarting it.",
   "Verbindung zum Kyubi-Server wieder da.": "Connection to the Kyubi server is back.",
+  "Server (Version {major}.x) und App passen nicht zusammen – App und Server auf denselben Hauptstand bringen.": "Server (version {major}.x) and app do not match – bring app and server to the same major version.",
   "Verbindung zum Kyubi-Server verloren – läuft der Hub noch? Es wird automatisch erneut versucht.": "Connection to the Kyubi server lost – is the hub still running? Retrying automatically.",
   "Ansicht steuern": "View controls",
   "Vergrößern": "Zoom in",

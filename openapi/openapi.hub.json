@@ -1,6 +1,91 @@
 {
   "components": {
     "schemas": {
+      "ApiVersion": {
+        "additionalProperties": false,
+        "description": "Version des Servers. Gleiche ``major`` = kompatibel, ``minor`` und ``patch`` sind frei.",
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/Capabilities"
+          },
+          "major": {
+            "title": "Major",
+            "type": "integer"
+          },
+          "minor": {
+            "title": "Minor",
+            "type": "integer"
+          },
+          "patch": {
+            "title": "Patch",
+            "type": "integer"
+          },
+          "prerelease": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Rest nach der Patch-Nummer, z. B. .dev0",
+            "title": "Prerelease"
+          },
+          "version": {
+            "description": "vollständige Version, z. B. 2.4.6 oder 0.1.0.dev0",
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "major",
+          "minor",
+          "patch",
+          "prerelease",
+          "capabilities"
+        ],
+        "title": "ApiVersion",
+        "type": "object"
+      },
+      "Capabilities": {
+        "additionalProperties": false,
+        "description": "Was dieser Server kann: Clients zeigen nur Vorhandenes an (progressive enhancement).",
+        "properties": {
+          "apps": {
+            "description": "Schlüssel der registrierten Apps",
+            "items": {
+              "type": "string"
+            },
+            "title": "Apps",
+            "type": "array"
+          },
+          "components": {
+            "description": "eingebaute Komponententypen",
+            "items": {
+              "type": "string"
+            },
+            "title": "Components",
+            "type": "array"
+          },
+          "operations": {
+            "description": "Namen der Operationen (kyubi.ops)",
+            "items": {
+              "type": "string"
+            },
+            "title": "Operations",
+            "type": "array"
+          }
+        },
+        "required": [
+          "apps",
+          "operations",
+          "components"
+        ],
+        "title": "Capabilities",
+        "type": "object"
+      },
       "CentralProjectRow": {
         "additionalProperties": false,
         "properties": {
@@ -358,6 +443,135 @@
           "url"
         ],
         "title": "HubProjectRow",
+        "type": "object"
+      },
+      "LicenseInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "apps": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "App → lizenzierte Plätze",
+            "title": "Apps",
+            "type": "object"
+          },
+          "compute": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "Einheit → Kontingent",
+            "title": "Compute",
+            "type": "object"
+          },
+          "cores_allowed": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "gedrosselt auf so viele Kerne (Rechenkontingent); null = keine",
+            "title": "Cores Allowed"
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer"
+          },
+          "days_left": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "bis zum Ablauf; danach negativ",
+            "title": "Days Left"
+          },
+          "expires": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires"
+          },
+          "grace_ends": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Ende der Karenz; danach nur lesen",
+            "title": "Grace Ends"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "installed": {
+            "description": "false: keine Lizenz, keine Einschränkung",
+            "title": "Installed",
+            "type": "boolean"
+          },
+          "problem": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Problem"
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "valid | warning | grace | read_only",
+            "title": "State"
+          },
+          "valid": {
+            "description": "false: Lizenz vorhanden, aber nicht prüfbar (siehe problem)",
+            "title": "Valid",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "installed",
+          "valid"
+        ],
+        "title": "LicenseInfo",
         "type": "object"
       },
       "Login": {
@@ -743,6 +957,24 @@
         "summary": "Overview"
       }
     },
+    "/api/license": {
+      "get": {
+        "operationId": "license_state_api_license_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LicenseInfo"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "License State"
+      }
+    },
     "/api/projects": {
       "post": {
         "description": "Projekt anlegen (D-136) und sofort einhängen – ohne Neustart des Hubs.",
@@ -1011,6 +1243,24 @@
           }
         },
         "summary": "Logout"
+      }
+    },
+    "/api/version": {
+      "get": {
+        "operationId": "version_api_version_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiVersion"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Version"
       }
     }
   }
