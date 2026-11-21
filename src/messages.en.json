@@ -1198,5 +1198,7 @@
   "YAML-Syntaxfehler: {}": "YAML syntax error: {}",
   "Zeichen {} ist in der Kodierung '{}' nicht darstellbar – Format mit encoding: utf-8 verwenden oder das Zeichen vorher ersetzen": "Character {} cannot be represented in encoding '{}' – use a format with encoding: utf-8 or replace the character first",
   "Die Eingabe einer Operation muss ein Objekt aus Name-Wert-Paaren sein": "The input of an operation must be an object of name-value pairs",
-  "Argumente als JSON-Objekt übergeben, z. B. {\"name\": \"…\"}": "Pass the arguments as a JSON object, e.g. {\"name\": \"…\"}"
+  "Argumente als JSON-Objekt übergeben, z. B. {\"name\": \"…\"}": "Pass the arguments as a JSON object, e.g. {\"name\": \"…\"}",
+  "App '{}' unbekannt": "App '{}' is unknown",
+  "Bekannt: {}": "Known: {}"
 }
