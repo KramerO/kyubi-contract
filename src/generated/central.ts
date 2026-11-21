@@ -53,6 +53,11 @@ export interface ChangeUser {
   roles?: Record<string, string | null>;
 }
 
+export interface Check {
+  license_id: string;
+  server_id?: string | null;
+}
+
 export interface Exchange {
   code: string;
   label?: string;
@@ -65,6 +70,7 @@ export interface HTTPValidationError {
 export interface LicenseInfo {
   apps?: Record<string, number>;
   compute?: Record<string, number>;
+  cores_allowed?: number | null;
   customer?: string | null;
   days_left?: number | null;
   expires?: string | null;
@@ -183,6 +189,25 @@ export interface Push {
 export interface PushResult {
   released: string[];
   version: number;
+}
+
+export interface RevocationAnswer {
+  revoked: boolean;
+}
+
+export interface RevocationEntry {
+  license_id: string;
+  reason: string;
+  revoked: string;
+}
+
+export interface RevocationList {
+  revoked: RevocationEntry[];
+}
+
+export interface Revoke {
+  license_id: string;
+  reason?: string;
 }
 
 export interface TokenCreated {

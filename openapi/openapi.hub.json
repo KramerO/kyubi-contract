@@ -464,6 +464,18 @@
             "title": "Compute",
             "type": "object"
           },
+          "cores_allowed": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "gedrosselt auf so viele Kerne (Rechenkontingent); null = keine",
+            "title": "Cores Allowed"
+          },
           "customer": {
             "anyOf": [
               {
