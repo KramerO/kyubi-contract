@@ -260,6 +260,28 @@
         "title": "ChatRequest",
         "type": "object"
       },
+      "ComponentLogs": {
+        "additionalProperties": false,
+        "properties": {
+          "component": {
+            "title": "Component",
+            "type": "string"
+          },
+          "instances": {
+            "items": {
+              "$ref": "#/components/schemas/InstanceLogs"
+            },
+            "title": "Instances",
+            "type": "array"
+          }
+        },
+        "required": [
+          "component",
+          "instances"
+        ],
+        "title": "ComponentLogs",
+        "type": "object"
+      },
       "Connect": {
         "properties": {
           "ca": {
@@ -593,6 +615,25 @@
         "title": "GraphEdge",
         "type": "object"
       },
+      "GraphLog": {
+        "additionalProperties": false,
+        "properties": {
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "text"
+        ],
+        "title": "GraphLog",
+        "type": "object"
+      },
       "GraphNode": {
         "additionalProperties": false,
         "properties": {
@@ -897,6 +938,49 @@
           }
         },
         "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "InstanceLog": {
+        "additionalProperties": false,
+        "properties": {
+          "instance": {
+            "title": "Instance",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "instance",
+          "text"
+        ],
+        "title": "InstanceLog",
+        "type": "object"
+      },
+      "InstanceLogs": {
+        "additionalProperties": false,
+        "properties": {
+          "instance": {
+            "title": "Instance",
+            "type": "string"
+          },
+          "log": {
+            "title": "Log",
+            "type": "string"
+          },
+          "stderr": {
+            "title": "Stderr",
+            "type": "string"
+          }
+        },
+        "required": [
+          "instance",
+          "log",
+          "stderr"
+        ],
+        "title": "InstanceLogs",
         "type": "object"
       },
       "Login": {
@@ -1324,6 +1408,373 @@
         "title": "Push",
         "type": "object"
       },
+      "RunCommandResult": {
+        "additionalProperties": false,
+        "description": "Ergebnis von Start, Abbruch und Neustart eines Laufs.",
+        "properties": {
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "nur bei Start und Neustart",
+            "title": "Data"
+          },
+          "diagnostics": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticOut"
+            },
+            "title": "Diagnostics",
+            "type": "array"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ok",
+          "diagnostics"
+        ],
+        "title": "RunCommandResult",
+        "type": "object"
+      },
+      "RunRow": {
+        "additionalProperties": false,
+        "description": "Eine Zeile der Lauf-Historie.",
+        "properties": {
+          "finished": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished"
+          },
+          "graph": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Graph"
+          },
+          "host": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Host"
+          },
+          "profile": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile"
+          },
+          "run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Id"
+          },
+          "started": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User"
+          }
+        },
+        "required": [
+          "run_id",
+          "graph",
+          "profile",
+          "status",
+          "started",
+          "finished",
+          "user",
+          "host"
+        ],
+        "title": "RunRow",
+        "type": "object"
+      },
+      "RunStatus": {
+        "additionalProperties": false,
+        "description": "Stand eines Laufs: live, fremd (andere Prozesse) oder abgeschlossen.",
+        "properties": {
+          "diagnostics": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DiagnosticOut"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diagnostics"
+          },
+          "event": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "letzte Zähler (nur live)",
+            "title": "Event"
+          },
+          "finished": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished"
+          },
+          "graph": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Graph"
+          },
+          "host": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Host"
+          },
+          "profile": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile"
+          },
+          "report": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Report des Laufs",
+            "title": "Report"
+          },
+          "run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Id"
+          },
+          "started": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User"
+          }
+        },
+        "required": [
+          "run_id",
+          "graph",
+          "status"
+        ],
+        "title": "RunStatus",
+        "type": "object"
+      },
+      "SampleColumn": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "type"
+        ],
+        "title": "SampleColumn",
+        "type": "object"
+      },
+      "SampleInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "component": {
+            "title": "Component",
+            "type": "string"
+          },
+          "port": {
+            "title": "Port",
+            "type": "string"
+          },
+          "rows": {
+            "title": "Rows",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "component",
+          "port",
+          "rows"
+        ],
+        "title": "SampleInfo",
+        "type": "object"
+      },
+      "SampleView": {
+        "additionalProperties": false,
+        "properties": {
+          "columns": {
+            "items": {
+              "$ref": "#/components/schemas/SampleColumn"
+            },
+            "title": "Columns",
+            "type": "array"
+          },
+          "component": {
+            "title": "Component",
+            "type": "string"
+          },
+          "port": {
+            "title": "Port",
+            "type": "string"
+          },
+          "rows": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Rows",
+            "type": "array"
+          },
+          "sampled": {
+            "title": "Sampled",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "component",
+          "port",
+          "columns",
+          "rows",
+          "sampled"
+        ],
+        "title": "SampleView",
+        "type": "object"
+      },
       "SandboxInfo": {
         "additionalProperties": false,
         "properties": {
@@ -1480,6 +1931,178 @@
           "type"
         ],
         "title": "ValidationError",
+        "type": "object"
+      },
+      "ViewerFlow": {
+        "additionalProperties": false,
+        "properties": {
+          "flow": {
+            "title": "Flow",
+            "type": "string"
+          },
+          "from": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "From"
+          },
+          "partition_info": {
+            "items": {
+              "$ref": "#/components/schemas/ViewerPartition"
+            },
+            "title": "Partition Info",
+            "type": "array"
+          },
+          "partitions": {
+            "title": "Partitions",
+            "type": "integer"
+          },
+          "rows": {
+            "title": "Rows",
+            "type": "integer"
+          },
+          "seen": {
+            "title": "Seen",
+            "type": "integer"
+          },
+          "to": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "To"
+          },
+          "truncated": {
+            "title": "Truncated",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "flow",
+          "from",
+          "to",
+          "partitions",
+          "rows",
+          "seen",
+          "truncated",
+          "partition_info"
+        ],
+        "title": "ViewerFlow",
+        "type": "object"
+      },
+      "ViewerPage": {
+        "additionalProperties": false,
+        "properties": {
+          "columns": {
+            "items": {
+              "$ref": "#/components/schemas/SampleColumn"
+            },
+            "title": "Columns",
+            "type": "array"
+          },
+          "flow": {
+            "title": "Flow",
+            "type": "string"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "partition": {
+            "title": "Partition",
+            "type": "string"
+          },
+          "returned_rows": {
+            "title": "Returned Rows",
+            "type": "integer"
+          },
+          "rows": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Rows",
+            "type": "array"
+          },
+          "seen": {
+            "title": "Seen",
+            "type": "integer"
+          },
+          "statistics": {
+            "additionalProperties": true,
+            "title": "Statistics",
+            "type": "object"
+          },
+          "total_rows": {
+            "title": "Total Rows",
+            "type": "integer"
+          },
+          "truncated": {
+            "title": "Truncated",
+            "type": "boolean"
+          },
+          "written": {
+            "title": "Written",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "flow",
+          "partition",
+          "columns",
+          "rows",
+          "total_rows",
+          "returned_rows",
+          "offset",
+          "limit",
+          "statistics",
+          "written",
+          "seen",
+          "truncated"
+        ],
+        "title": "ViewerPage",
+        "type": "object"
+      },
+      "ViewerPartition": {
+        "additionalProperties": false,
+        "properties": {
+          "partition": {
+            "title": "Partition",
+            "type": "string"
+          },
+          "rows": {
+            "title": "Rows",
+            "type": "integer"
+          },
+          "seen": {
+            "title": "Seen",
+            "type": "integer"
+          },
+          "truncated": {
+            "title": "Truncated",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "partition",
+          "rows",
+          "seen",
+          "truncated"
+        ],
+        "title": "ViewerPartition",
         "type": "object"
       }
     }
@@ -2530,8 +3153,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "additionalProperties": true,
-                    "type": "object"
+                    "$ref": "#/components/schemas/RunRow"
                   },
                   "title": "Response History Api Runs Get",
                   "type": "array"
@@ -2570,9 +3192,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Start Api Runs Post",
-                  "type": "object"
+                  "$ref": "#/components/schemas/RunCommandResult"
                 }
               }
             },
@@ -2611,9 +3231,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Status Api Runs  Run Id  Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/RunStatus"
                 }
               }
             },
@@ -2652,9 +3270,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Cancel Api Runs  Run Id  Cancel Post",
-                  "type": "object"
+                  "$ref": "#/components/schemas/RunCommandResult"
                 }
               }
             },
@@ -2703,9 +3319,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Component Logs Api Runs  Run Id  Components  Component  Logs Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/ComponentLogs"
                 }
               }
             },
@@ -2745,9 +3359,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Graph Log Api Runs  Run Id  Graph Log Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/GraphLog"
                 }
               }
             },
@@ -2795,9 +3407,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Logs Api Runs  Run Id  Logs  Instance  Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/InstanceLog"
                 }
               }
             },
@@ -2847,9 +3457,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Restart Api Runs  Run Id  Restart Post",
-                  "type": "object"
+                  "$ref": "#/components/schemas/RunCommandResult"
                 }
               }
             },
@@ -2890,8 +3498,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "additionalProperties": true,
-                    "type": "object"
+                    "$ref": "#/components/schemas/SampleInfo"
                   },
                   "title": "Response Sample List Api Runs  Run Id  Samples Get",
                   "type": "array"
@@ -2961,9 +3568,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Sample Api Runs  Run Id  Samples  Component   Port  Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/SampleView"
                 }
               }
             },
@@ -3004,8 +3609,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "additionalProperties": true,
-                    "type": "object"
+                    "$ref": "#/components/schemas/ViewerFlow"
                   },
                   "title": "Response Viewer List Api Runs  Run Id  Viewers Get",
                   "type": "array"
@@ -3139,9 +3743,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Viewer Read Api Runs  Run Id  Viewers  Flow  Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/ViewerPage"
                 }
               }
             },
