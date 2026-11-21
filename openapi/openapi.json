@@ -1,6 +1,55 @@
 {
   "components": {
     "schemas": {
+      "AiModels": {
+        "additionalProperties": false,
+        "properties": {
+          "models": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Models",
+            "type": "array"
+          },
+          "online": {
+            "title": "Online",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "online",
+          "models"
+        ],
+        "title": "AiModels",
+        "type": "object"
+      },
+      "AiStatus": {
+        "additionalProperties": false,
+        "properties": {
+          "host": {
+            "title": "Host",
+            "type": "string"
+          },
+          "models": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Models",
+            "type": "array"
+          },
+          "online": {
+            "title": "Online",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "online",
+          "models",
+          "host"
+        ],
+        "title": "AiStatus",
+        "type": "object"
+      },
       "AttemptRow": {
         "additionalProperties": false,
         "properties": {
@@ -379,6 +428,57 @@
         "title": "Connect",
         "type": "object"
       },
+      "DbtExportResult": {
+        "additionalProperties": false,
+        "properties": {
+          "kept": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Kept",
+            "type": "array"
+          },
+          "placeholders": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Placeholders",
+            "type": "array"
+          },
+          "project": {
+            "title": "Project",
+            "type": "string"
+          },
+          "removed": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Removed",
+            "type": "array"
+          },
+          "target": {
+            "title": "Target",
+            "type": "string"
+          },
+          "written": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Written",
+            "type": "array"
+          }
+        },
+        "required": [
+          "project",
+          "target",
+          "written",
+          "kept",
+          "removed",
+          "placeholders"
+        ],
+        "title": "DbtExportResult",
+        "type": "object"
+      },
       "Diagnostic": {
         "description": "Eine Meldung zu einer Stelle in einer Nutzerdatei.\n\n`line` und `col` sind 1-basiert. `path` ist der Pfad im Dokument\n(z. B. ``components.read.params.path``).",
         "properties": {
@@ -644,6 +744,76 @@
           }
         },
         "title": "ExportBody",
+        "type": "object"
+      },
+      "FileEntry": {
+        "additionalProperties": false,
+        "properties": {
+          "is_dir": {
+            "title": "Is Dir",
+            "type": "boolean"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          }
+        },
+        "required": [
+          "name",
+          "path",
+          "is_dir",
+          "size"
+        ],
+        "title": "FileEntry",
+        "type": "object"
+      },
+      "FilesListing": {
+        "additionalProperties": false,
+        "properties": {
+          "dir": {
+            "title": "Dir",
+            "type": "string"
+          },
+          "entries": {
+            "items": {
+              "$ref": "#/components/schemas/FileEntry"
+            },
+            "title": "Entries",
+            "type": "array"
+          },
+          "parent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent"
+          }
+        },
+        "required": [
+          "dir",
+          "parent",
+          "entries"
+        ],
+        "title": "FilesListing",
         "type": "object"
       },
       "GraphEdge": {
@@ -1096,6 +1266,30 @@
           }
         },
         "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "Health": {
+        "additionalProperties": false,
+        "properties": {
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          },
+          "project": {
+            "title": "Project",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ok",
+          "version",
+          "project"
+        ],
+        "title": "Health",
         "type": "object"
       },
       "InstanceDetail": {
@@ -2326,6 +2520,37 @@
           "reason"
         ],
         "title": "PreviewRejected",
+        "type": "object"
+      },
+      "Problem": {
+        "additionalProperties": false,
+        "description": "Fehlerkörper mit Code und Hinweis (HTTP 4xx).",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "error": {
+            "title": "Error",
+            "type": "string"
+          },
+          "hint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hint"
+          }
+        },
+        "required": [
+          "error",
+          "code"
+        ],
+        "title": "Problem",
         "type": "object"
       },
       "ProjectObject": {
@@ -3873,9 +4098,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Ai Models Api Ai Models Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/AiModels"
                 }
               }
             },
@@ -3893,9 +4116,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Ai Status Api Ai Status Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/AiStatus"
                 }
               }
             },
@@ -3945,7 +4166,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Response Export Api Dbt Export Post"
+                  "$ref": "#/components/schemas/DbtExportResult"
                 }
               }
             },
@@ -3955,11 +4176,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/Problem"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Unprocessable Content"
           }
         },
         "summary": "Export"
@@ -3999,9 +4220,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response List Files Api Files Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/FilesListing"
                 }
               }
             },
@@ -4084,9 +4303,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Health Api Health Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/Health"
                 }
               }
             },
@@ -4870,9 +5087,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Graph View Api Repo Graph View Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/GraphView"
                 }
               }
             },
