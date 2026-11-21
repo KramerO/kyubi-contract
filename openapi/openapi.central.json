@@ -220,6 +220,21 @@
       },
       "ChangeUser": {
         "properties": {
+          "apps": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Apps ersetzen (je ein Platz)",
+            "title": "Apps"
+          },
           "disabled": {
             "anyOf": [
               {
@@ -524,6 +539,14 @@
             "default": false,
             "title": "Admin",
             "type": "boolean"
+          },
+          "apps": {
+            "description": "zugewiesene Apps (je ein Platz)",
+            "items": {
+              "type": "string"
+            },
+            "title": "Apps",
+            "type": "array"
           },
           "display": {
             "anyOf": [
@@ -885,6 +908,14 @@
       "UserOut": {
         "additionalProperties": false,
         "properties": {
+          "apps": {
+            "description": "zugewiesene Apps; jede belegt einen Platz (D-217)",
+            "items": {
+              "type": "string"
+            },
+            "title": "Apps",
+            "type": "array"
+          },
           "disabled": {
             "title": "Disabled",
             "type": "boolean"
@@ -916,7 +947,8 @@
           "name",
           "display",
           "disabled",
-          "roles"
+          "roles",
+          "apps"
         ],
         "title": "UserOut",
         "type": "object"

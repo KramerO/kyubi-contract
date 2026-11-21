@@ -47,6 +47,7 @@ export interface CentralInfo {
 }
 
 export interface ChangeUser {
+  apps?: string[] | null;
   disabled?: boolean | null;
   display?: string | null;
   roles?: Record<string, string | null>;
@@ -115,6 +116,7 @@ export interface NewToken {
 
 export interface NewUser {
   admin?: boolean;
+  apps?: string[];
   display?: string | null;
   name: string;
   password?: string | null;
@@ -190,6 +192,7 @@ export interface UserList {
 }
 
 export interface UserOut {
+  apps: string[];
   disabled: boolean;
   display: string | null;
   name: string;
