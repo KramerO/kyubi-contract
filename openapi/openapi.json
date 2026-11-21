@@ -1,6 +1,78 @@
 {
   "components": {
     "schemas": {
+      "AttemptRow": {
+        "additionalProperties": false,
+        "properties": {
+          "attempt": {
+            "title": "Attempt",
+            "type": "integer"
+          },
+          "ended_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ended At"
+          },
+          "job": {
+            "title": "Job",
+            "type": "string"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Id"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "state": {
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "job",
+          "attempt",
+          "run_id",
+          "state",
+          "started_at",
+          "ended_at",
+          "message"
+        ],
+        "title": "AttemptRow",
+        "type": "object"
+      },
       "Breadcrumb": {
         "additionalProperties": false,
         "properties": {
@@ -463,6 +535,92 @@
           "message"
         ],
         "title": "DiagnosticOut",
+        "type": "object"
+      },
+      "EventRow": {
+        "additionalProperties": false,
+        "properties": {
+          "actor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actor"
+          },
+          "at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "At"
+          },
+          "from": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "From"
+          },
+          "job": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Job"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "seq": {
+            "title": "Seq",
+            "type": "integer"
+          },
+          "to": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "To"
+          }
+        },
+        "required": [
+          "seq",
+          "at",
+          "job",
+          "from",
+          "to",
+          "actor",
+          "reason"
+        ],
+        "title": "EventRow",
         "type": "object"
       },
       "ExportBody": {
@@ -940,6 +1098,179 @@
         "title": "HTTPValidationError",
         "type": "object"
       },
+      "InstanceDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "attempts": {
+            "items": {
+              "$ref": "#/components/schemas/AttemptRow"
+            },
+            "title": "Attempts",
+            "type": "array"
+          },
+          "business_date": {
+            "title": "Business Date",
+            "type": "string"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "ended_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ended At"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/EventRow"
+            },
+            "title": "Events",
+            "type": "array"
+          },
+          "held": {
+            "title": "Held",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "job_count": {
+            "title": "Job Count",
+            "type": "integer"
+          },
+          "job_details": {
+            "items": {
+              "$ref": "#/components/schemas/JobDetail"
+            },
+            "title": "Job Details",
+            "type": "array"
+          },
+          "jobs": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Jobs",
+            "type": "object"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "param_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Param Set"
+          },
+          "params": {
+            "additionalProperties": true,
+            "title": "Params",
+            "type": "object"
+          },
+          "plan": {
+            "title": "Plan",
+            "type": "string"
+          },
+          "plan_missing": {
+            "title": "Plan Missing",
+            "type": "boolean"
+          },
+          "sandbox": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Sandbox je Graph des Plans (Alias → Pfad)",
+            "title": "Sandbox",
+            "type": "object"
+          },
+          "scheduled_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheduled At"
+          },
+          "sla": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sla"
+          },
+          "state": {
+            "title": "State",
+            "type": "string"
+          },
+          "timezone": {
+            "title": "Timezone",
+            "type": "string"
+          },
+          "trigger": {
+            "title": "Trigger",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "plan",
+          "business_date",
+          "scheduled_at",
+          "created_at",
+          "ended_at",
+          "trigger",
+          "state",
+          "held",
+          "params",
+          "param_set",
+          "sandbox",
+          "jobs",
+          "job_count",
+          "sla",
+          "message",
+          "timezone",
+          "plan_missing",
+          "job_details",
+          "attempts",
+          "events"
+        ],
+        "title": "InstanceDetail",
+        "type": "object"
+      },
       "InstanceLog": {
         "additionalProperties": false,
         "properties": {
@@ -981,6 +1312,368 @@
           "stderr"
         ],
         "title": "InstanceLogs",
+        "type": "object"
+      },
+      "InstanceRow": {
+        "additionalProperties": false,
+        "properties": {
+          "business_date": {
+            "title": "Business Date",
+            "type": "string"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "ended_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ended At"
+          },
+          "held": {
+            "title": "Held",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "job_count": {
+            "title": "Job Count",
+            "type": "integer"
+          },
+          "jobs": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Jobs",
+            "type": "object"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "param_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Param Set"
+          },
+          "params": {
+            "additionalProperties": true,
+            "title": "Params",
+            "type": "object"
+          },
+          "plan": {
+            "title": "Plan",
+            "type": "string"
+          },
+          "sandbox": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Sandbox je Graph des Plans (Alias → Pfad)",
+            "title": "Sandbox",
+            "type": "object"
+          },
+          "scheduled_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheduled At"
+          },
+          "sla": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sla"
+          },
+          "state": {
+            "title": "State",
+            "type": "string"
+          },
+          "trigger": {
+            "title": "Trigger",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "plan",
+          "business_date",
+          "scheduled_at",
+          "created_at",
+          "ended_at",
+          "trigger",
+          "state",
+          "held",
+          "params",
+          "param_set",
+          "sandbox",
+          "jobs",
+          "job_count",
+          "sla",
+          "message"
+        ],
+        "title": "InstanceRow",
+        "type": "object"
+      },
+      "JobDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "attempt": {
+            "title": "Attempt",
+            "type": "integer"
+          },
+          "cancel_requested": {
+            "title": "Cancel Requested",
+            "type": "boolean"
+          },
+          "depends_on": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Depends On",
+            "type": "array"
+          },
+          "ended_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ended At"
+          },
+          "file": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File"
+          },
+          "graph": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Graph"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "not_before": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Not Before"
+          },
+          "param_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Param Set"
+          },
+          "plan": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Plan"
+          },
+          "resources": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Resources",
+            "type": "object"
+          },
+          "retries": {
+            "title": "Retries",
+            "type": "integer"
+          },
+          "run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Id"
+          },
+          "sla": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sla"
+          },
+          "sla_deadline": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sla Deadline"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "state": {
+            "title": "State",
+            "type": "string"
+          },
+          "timeout": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timeout"
+          }
+        },
+        "required": [
+          "name",
+          "state",
+          "attempt",
+          "run_id",
+          "started_at",
+          "ended_at",
+          "not_before",
+          "message",
+          "cancel_requested",
+          "sla",
+          "sla_deadline",
+          "kind",
+          "graph",
+          "param_set",
+          "plan",
+          "file",
+          "depends_on",
+          "resources",
+          "retries",
+          "timeout"
+        ],
+        "title": "JobDetail",
+        "type": "object"
+      },
+      "LastInstance": {
+        "additionalProperties": false,
+        "properties": {
+          "business_date": {
+            "title": "Business Date",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "state": {
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "state",
+          "business_date"
+        ],
+        "title": "LastInstance",
         "type": "object"
       },
       "Login": {
@@ -1025,6 +1718,291 @@
           }
         },
         "title": "Login",
+        "type": "object"
+      },
+      "MappingDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code"
+          },
+          "diagnostics": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticOut"
+            },
+            "title": "Diagnostics",
+            "type": "array"
+          },
+          "execution": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MappingExecution"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "input": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/SchemaTreeNode"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input"
+          },
+          "mapping": {
+            "additionalProperties": true,
+            "title": "Mapping",
+            "type": "object"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "output": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/SchemaTreeNode"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Output"
+          },
+          "readonly": {
+            "title": "Readonly",
+            "type": "boolean"
+          },
+          "source_map": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Source Map",
+            "type": "object"
+          },
+          "status": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Status",
+            "type": "object"
+          },
+          "vectorized": {
+            "title": "Vectorized",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "readonly",
+          "mapping",
+          "input",
+          "output",
+          "status",
+          "diagnostics",
+          "code",
+          "vectorized",
+          "execution",
+          "source_map"
+        ],
+        "title": "MappingDetail",
+        "type": "object"
+      },
+      "MappingExecution": {
+        "additionalProperties": false,
+        "properties": {
+          "arrow_fields": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Arrow Fields"
+          },
+          "mode": {
+            "title": "Mode",
+            "type": "string"
+          },
+          "python_columns": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Python Columns"
+          },
+          "python_fields": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Python Fields"
+          }
+        },
+        "required": [
+          "mode"
+        ],
+        "title": "MappingExecution",
+        "type": "object"
+      },
+      "MappingListItem": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "input": {
+            "title": "Input",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "output": {
+            "title": "Output",
+            "type": "string"
+          },
+          "readonly": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Readonly"
+          },
+          "sandbox": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "nur bei eingebundenen Mappings",
+            "title": "Sandbox"
+          },
+          "shadowed": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shadowed"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "input",
+          "output"
+        ],
+        "title": "MappingListItem",
+        "type": "object"
+      },
+      "MappingPreview": {
+        "additionalProperties": false,
+        "properties": {
+          "diagnostics": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticOut"
+            },
+            "title": "Diagnostics",
+            "type": "array"
+          },
+          "dropped": {
+            "title": "Dropped"
+          },
+          "logs": {
+            "title": "Logs"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          },
+          "outputs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Outputs",
+            "type": "array"
+          },
+          "rejected": {
+            "items": {
+              "$ref": "#/components/schemas/PreviewRejected"
+            },
+            "title": "Rejected",
+            "type": "array"
+          },
+          "rows_in": {
+            "title": "Rows In",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "ok",
+          "rows_in",
+          "outputs",
+          "rejected",
+          "dropped",
+          "logs",
+          "diagnostics"
+        ],
+        "title": "MappingPreview",
         "type": "object"
       },
       "NodePort": {
@@ -1073,6 +2051,20 @@
           "schema"
         ],
         "title": "NodePort",
+        "type": "object"
+      },
+      "OkResult": {
+        "additionalProperties": false,
+        "properties": {
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ok"
+        ],
+        "title": "OkResult",
         "type": "object"
       },
       "OpResult": {
@@ -1142,6 +2134,117 @@
         "title": "OperationInfo",
         "type": "object"
       },
+      "PlanRow": {
+        "additionalProperties": false,
+        "properties": {
+          "calendar": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calendar"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "enabled": {
+            "title": "Enabled",
+            "type": "boolean"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "nur wenn der Zeitplan nicht rechenbar ist",
+            "title": "Error"
+          },
+          "jobs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Jobs",
+            "type": "array"
+          },
+          "last": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LastInstance"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "next_business_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Business Date"
+          },
+          "next_fire": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Fire"
+          },
+          "schedule": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Schedule"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "enabled",
+          "calendar",
+          "schedule",
+          "jobs",
+          "next_fire",
+          "next_business_date",
+          "last"
+        ],
+        "title": "PlanRow",
+        "type": "object"
+      },
       "PreviewInput": {
         "properties": {
           "file": {
@@ -1204,6 +2307,25 @@
           }
         },
         "title": "PreviewInput",
+        "type": "object"
+      },
+      "PreviewRejected": {
+        "additionalProperties": false,
+        "properties": {
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "row": {
+            "title": "Row",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "row",
+          "reason"
+        ],
+        "title": "PreviewRejected",
         "type": "object"
       },
       "ProjectObject": {
@@ -1376,6 +2498,190 @@
         "title": "ProjectView",
         "type": "object"
       },
+      "ProposalDetail": {
+        "additionalProperties": false,
+        "description": "Vorschlag mit Operationen und dem Ergebnis des Abspielens (Vorschau).",
+        "properties": {
+          "author": {
+            "title": "Author",
+            "type": "string"
+          },
+          "created": {
+            "title": "Created",
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "diagnostics": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticOut"
+            },
+            "title": "Diagnostics",
+            "type": "array"
+          },
+          "diff": {
+            "title": "Diff",
+            "type": "string"
+          },
+          "files": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Files",
+            "type": "array"
+          },
+          "graphs": {
+            "description": "geänderte Graphen, die sich als Vorschau zeigen lassen",
+            "items": {
+              "type": "string"
+            },
+            "title": "Graphs",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          },
+          "ops": {
+            "items": {
+              "$ref": "#/components/schemas/ProposedOpOut"
+            },
+            "title": "Ops",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "open",
+              "accepted",
+              "rejected"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "updated": {
+            "title": "Updated",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "author",
+          "status",
+          "created",
+          "updated",
+          "ops",
+          "ok",
+          "files",
+          "graphs",
+          "diff",
+          "diagnostics"
+        ],
+        "title": "ProposalDetail",
+        "type": "object"
+      },
+      "ProposalSummary": {
+        "additionalProperties": false,
+        "description": "Vorschlag ohne Operationen (Liste).",
+        "properties": {
+          "author": {
+            "title": "Author",
+            "type": "string"
+          },
+          "created": {
+            "title": "Created",
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "op_count": {
+            "title": "Op Count",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "open",
+              "accepted",
+              "rejected"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "updated": {
+            "title": "Updated",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "author",
+          "status",
+          "created",
+          "updated",
+          "op_count"
+        ],
+        "title": "ProposalSummary",
+        "type": "object"
+      },
+      "ProposedOpOut": {
+        "additionalProperties": false,
+        "properties": {
+          "input": {
+            "additionalProperties": true,
+            "title": "Input",
+            "type": "object"
+          },
+          "op": {
+            "title": "Op",
+            "type": "string"
+          }
+        },
+        "required": [
+          "op",
+          "input"
+        ],
+        "title": "ProposedOpOut",
+        "type": "object"
+      },
       "Push": {
         "properties": {
           "message": {
@@ -1406,6 +2712,218 @@
           }
         },
         "title": "Push",
+        "type": "object"
+      },
+      "RemoteConnected": {
+        "additionalProperties": false,
+        "properties": {
+          "ca": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ca"
+          },
+          "configured": {
+            "title": "Configured",
+            "type": "boolean"
+          },
+          "login_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Login Error"
+          },
+          "login_pending": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Login Pending"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Version der Zentrale",
+            "title": "Version"
+          }
+        },
+        "required": [
+          "configured"
+        ],
+        "title": "RemoteConnected",
+        "type": "object"
+      },
+      "RemoteInfo": {
+        "additionalProperties": false,
+        "description": "Stand der Verbindung; ohne Einrichtung nur ``configured: false``.",
+        "properties": {
+          "ca": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ca"
+          },
+          "configured": {
+            "title": "Configured",
+            "type": "boolean"
+          },
+          "login_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Login Error"
+          },
+          "login_pending": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Login Pending"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User"
+          }
+        },
+        "required": [
+          "configured"
+        ],
+        "title": "RemoteInfo",
+        "type": "object"
+      },
+      "RemoteProblem": {
+        "additionalProperties": false,
+        "description": "Fehlerkörper (HTTP 4xx/5xx) mit Code und Hinweis.",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "error": {
+            "title": "Error",
+            "type": "string"
+          },
+          "hint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hint"
+          }
+        },
+        "required": [
+          "error",
+          "code"
+        ],
+        "title": "RemoteProblem",
+        "type": "object"
+      },
+      "RemotePush": {
+        "additionalProperties": false,
+        "properties": {
+          "files": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Files",
+            "type": "array"
+          },
+          "pulled": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pulled",
+            "type": "array"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "files",
+          "pulled"
+        ],
+        "title": "RemotePush",
         "type": "object"
       },
       "RunCommandResult": {
@@ -1799,6 +3317,147 @@
         "title": "SandboxInfo",
         "type": "object"
       },
+      "SchedulerOverview": {
+        "additionalProperties": false,
+        "properties": {
+          "errors": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Errors",
+            "type": "array"
+          },
+          "instances": {
+            "items": {
+              "$ref": "#/components/schemas/InstanceRow"
+            },
+            "title": "Instances",
+            "type": "array"
+          },
+          "leader": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Leader"
+          },
+          "now": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Now"
+          },
+          "plans": {
+            "items": {
+              "$ref": "#/components/schemas/PlanRow"
+            },
+            "title": "Plans",
+            "type": "array"
+          },
+          "running": {
+            "title": "Running",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "now",
+          "running",
+          "leader",
+          "errors",
+          "plans",
+          "instances"
+        ],
+        "title": "SchedulerOverview",
+        "type": "object"
+      },
+      "SchedulerRunning": {
+        "additionalProperties": false,
+        "properties": {
+          "running": {
+            "title": "Running",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "running"
+        ],
+        "title": "SchedulerRunning",
+        "type": "object"
+      },
+      "SchemaTreeNode": {
+        "additionalProperties": false,
+        "description": "Feld eines Schemas als Baum (Eingabe/Ausgabe des Mappings).",
+        "properties": {
+          "default": {
+            "title": "Default"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "fields": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/SchemaTreeNode"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fields"
+          },
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SchemaTreeNode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "nullable": {
+            "title": "Nullable",
+            "type": "boolean"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "nullable",
+          "default",
+          "description"
+        ],
+        "title": "SchemaTreeNode",
+        "type": "object"
+      },
       "Severity": {
         "enum": [
           "error",
@@ -1807,6 +3466,67 @@
         ],
         "title": "Severity",
         "type": "string"
+      },
+      "Snippet": {
+        "additionalProperties": false,
+        "properties": {
+          "category": {
+            "title": "Category",
+            "type": "string"
+          },
+          "category_en": {
+            "title": "Category En",
+            "type": "string"
+          },
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "description_en": {
+            "title": "Description En",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "name_en": {
+            "title": "Name En",
+            "type": "string"
+          },
+          "origin": {
+            "title": "Origin",
+            "type": "string"
+          },
+          "problem": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Problem"
+          }
+        },
+        "required": [
+          "name",
+          "name_en",
+          "category",
+          "category_en",
+          "description",
+          "description_en",
+          "code",
+          "origin",
+          "problem"
+        ],
+        "title": "Snippet",
+        "type": "object"
       },
       "StartRun": {
         "properties": {
@@ -2404,8 +4124,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "additionalProperties": true,
-                    "type": "object"
+                    "$ref": "#/components/schemas/Snippet"
                   },
                   "title": "Response Snippets Api Mapper Snippets Get",
                   "type": "array"
@@ -2437,8 +4156,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "additionalProperties": true,
-                    "type": "object"
+                    "$ref": "#/components/schemas/MappingListItem"
                   },
                   "title": "Response List Mappings Api Mappings Get",
                   "type": "array"
@@ -2470,9 +4188,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Detail Api Mappings  Name  Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/MappingDetail"
                 }
               }
             },
@@ -2521,23 +4237,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Preview Api Mappings  Name  Preview Post",
-                  "type": "object"
+                  "$ref": "#/components/schemas/MappingPreview"
                 }
               }
             },
             "description": "Successful Response"
           },
           "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            },
-            "description": "Validation Error"
+            "description": "Vorschau nicht möglich"
           }
         },
         "summary": "Preview"
@@ -2716,8 +4423,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "additionalProperties": true,
-                    "type": "object"
+                    "$ref": "#/components/schemas/ProposalSummary"
                   },
                   "title": "Response List All Api Proposals Get",
                   "type": "array"
@@ -2759,9 +4465,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Detail Api Proposals  Proposal Id  Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/ProposalDetail"
                 }
               }
             },
@@ -2800,9 +4504,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Accept Api Proposals  Proposal Id  Accept Post",
-                  "type": "object"
+                  "$ref": "#/components/schemas/ChangesetResult"
                 }
               }
             },
@@ -2850,9 +4552,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Preview Api Proposals  Proposal Id  Graphs  Name  View Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/GraphView"
                 }
               }
             },
@@ -2891,9 +4591,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Reject Api Proposals  Proposal Id  Reject Post",
-                  "type": "object"
+                  "$ref": "#/components/schemas/OkResult"
                 }
               }
             },
@@ -2921,9 +4619,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Remote Info Api Remote Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/RemoteInfo"
                 }
               }
             },
@@ -2951,11 +4647,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Response Connect Api Remote Connect Post"
+                  "$ref": "#/components/schemas/RemoteConnected"
                 }
               }
             },
             "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoteProblem"
+                }
+              }
+            },
+            "description": "Bad Request"
           },
           "422": {
             "content": {
@@ -2966,6 +4672,16 @@
               }
             },
             "description": "Validation Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoteProblem"
+                }
+              }
+            },
+            "description": "Bad Gateway"
           }
         },
         "summary": "Connect"
@@ -2989,11 +4705,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Response Login Api Remote Login Post"
+                  "$ref": "#/components/schemas/RemoteInfo"
                 }
               }
             },
             "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoteProblem"
+                }
+              }
+            },
+            "description": "Bad Request"
           },
           "422": {
             "content": {
@@ -3004,6 +4730,16 @@
               }
             },
             "description": "Validation Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoteProblem"
+                }
+              }
+            },
+            "description": "Bad Gateway"
           }
         },
         "summary": "Login"
@@ -3017,11 +4753,31 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Response Logout Api Remote Logout Post"
+                  "$ref": "#/components/schemas/RemoteInfo"
                 }
               }
             },
             "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoteProblem"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoteProblem"
+                }
+              }
+            },
+            "description": "Bad Gateway"
           }
         },
         "summary": "Logout"
@@ -3045,11 +4801,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Response Push Changes Api Remote Push Post"
+                  "$ref": "#/components/schemas/RemotePush"
                 }
               }
             },
             "description": "Successful Response"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoteProblem"
+                }
+              }
+            },
+            "description": "Conflict"
           },
           "422": {
             "content": {
@@ -3060,6 +4826,16 @@
               }
             },
             "description": "Validation Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoteProblem"
+                }
+              }
+            },
+            "description": "Bad Gateway"
           }
         },
         "summary": "Push Changes"
@@ -3783,9 +5559,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Scheduler Overview Api Scheduler Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/SchedulerOverview"
                 }
               }
             },
@@ -3824,9 +5598,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Scheduler Instance Api Scheduler Instances  Instance Id  Get",
-                  "type": "object"
+                  "$ref": "#/components/schemas/InstanceDetail"
                 }
               }
             },
@@ -3855,9 +5627,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Scheduler Start Api Scheduler Start Post",
-                  "type": "object"
+                  "$ref": "#/components/schemas/SchedulerRunning"
                 }
               }
             },
@@ -3875,9 +5645,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Scheduler Stop Api Scheduler Stop Post",
-                  "type": "object"
+                  "$ref": "#/components/schemas/SchedulerRunning"
                 }
               }
             },
