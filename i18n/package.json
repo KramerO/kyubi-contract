@@ -1,14 +1,14 @@
 {
-  "name": "@kyubi/i18n",
+  "name": "@kramero/kyubi-i18n",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "exports": {
     ".": "./src/index.ts"
   },
   "scripts": {
     "test": "vitest run",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json",
+    "build": "npm run typecheck"
   },
   "peerDependencies": {
     "react": "^19.3.0"
@@ -19,5 +19,18 @@
     "react": "^19.3.1",
     "typescript": "^7.0.2",
     "vitest": "^5.1.0"
-  }
+  },
+  "description": "Übersetzung (Deutsch/Englisch) für die Kyubi-Apps",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KramerO/kyubi-contract.git",
+    "directory": "i18n"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "src"
+  ]
 }
