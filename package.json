@@ -19,7 +19,7 @@
   "sideEffects": false,
   "scripts": {
     "typecheck": "tsc -p tsconfig.json && npm run typecheck -w @kramero/kyubi-i18n",
-    "test": "vitest run test && npm run test -w @kramero/kyubi-i18n",
+    "test": "vitest run --dir test && npm run test -w @kramero/kyubi-i18n",
     "build": "npm run typecheck"
   },
   "devDependencies": {
