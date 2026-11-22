@@ -1,12 +1,12 @@
 {
   "name": "@kramero/kyubi-contract",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Vertrag zwischen Server und Apps: erzeugte API-Typen und Nachrichtenkatalog (D-214, D-215)",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "repository": { "type": "git", "url": "git+https://github.com/KramerO/kyubi-contract.git" },
   "publishConfig": { "registry": "https://npm.pkg.github.com" },
-  "files": ["src", "openapi"],
+  "files": ["src", "openapi", "LICENSE", "NOTICE"],
   "workspaces": ["i18n"],
   "exports": {
     ".": "./src/index.ts",
