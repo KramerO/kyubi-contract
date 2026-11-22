@@ -1,21 +1,30 @@
 {
-  "name": "@kyubi/contract",
+  "name": "@kramero/kyubi-contract",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "description": "Vertrag zwischen Server und Apps: erzeugte API-Typen und Nachrichtenkatalog (D-214, D-215)",
+  "license": "UNLICENSED",
+  "repository": { "type": "git", "url": "git+https://github.com/KramerO/kyubi-contract.git" },
+  "publishConfig": { "registry": "https://npm.pkg.github.com" },
+  "files": ["src", "openapi"],
+  "workspaces": ["i18n"],
   "exports": {
     ".": "./src/index.ts",
     "./server": "./src/generated/server.ts",
     "./hub": "./src/generated/hub.ts",
     "./central": "./src/generated/central.ts",
-    "./messages.en.json": "./src/messages.en.json"
+    "./messages.en.json": "./src/messages.en.json",
+    "./openapi/*": "./openapi/*"
   },
   "sideEffects": false,
   "scripts": {
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json && npm run typecheck -w @kramero/kyubi-i18n",
+    "test": "vitest run --dir test && npm run test -w @kramero/kyubi-i18n",
+    "build": "npm run typecheck"
   },
   "devDependencies": {
-    "typescript": "^7.0.2"
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
   }
 }

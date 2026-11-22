@@ -8,9 +8,9 @@ import { en } from "./en";
 import { calls, untranslated, type Finding } from "./scan";
 import { translate } from "./translate";
 
-const APPS = fileURLToPath(new URL("../../..", import.meta.url));
-const DIRS = ["designer", "controlcenter", "mapper", "metahub", "keystore", "hub", "repo", "service", "docs",
-  "shared/client", "shared/ui", "shared/graph-canvas", "shared/i18n"].map((d) => `${d}/src`);
+const APPS = fileURLToPath(new URL("..", import.meta.url));
+// Nur dieses Paket: die Prüfung gegen alle Apps (verwaiste Einträge, App-Texte) bleibt im Monorepo KyubiETL.
+const DIRS = ["src"];
 // Ausnahmen: Dateien, deren Texte (noch) nicht übersetzt werden – derzeit keine
 const PENDING = new Set<string>([]);
 
@@ -35,11 +35,6 @@ describe("Übersetzungen", () => {
       .filter(([file]) => !PENDING.has(file.split("/").pop() ?? ""))
       .flatMap(([file, src]) => untranslated(file, src));
     expect(show(open)).toEqual([]);
-  });
-
-  it("keine verwaisten Einträge", () => {
-    const used = new Set(sources().flatMap(([file, src]) => calls(file, src).map((c) => c.text)));
-    expect(Object.keys(en).filter((k) => !used.has(k))).toEqual([]);
   });
 
   it("Platzhalter stimmen überein", () => {
