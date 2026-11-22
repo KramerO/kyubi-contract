@@ -62,3 +62,7 @@ npm publish                       # @kramero/kyubi-contract
 
 Reihenfolge: erst `@kramero/kyubi-i18n` und `@kramero/kyubi-contract`, danach die Pakete aus
 `kyubi-shared-ui`. Danach Tag `vX.Y.Z` setzen.
+
+## Lizenz
+
+Apache License 2.0 – siehe [LICENSE](LICENSE) und [NOTICE](NOTICE). Der API-Vertrag (OpenAPI-Stände, erzeugte Typen, Nachrichtenkatalog) darf frei verwendet werden, auch für eigene Clients.
