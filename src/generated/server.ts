@@ -45,6 +45,7 @@ export interface CanvasNote {
 export interface Capabilities {
   apps: string[];
   components: string[];
+  features?: string[];
   operations: string[];
 }
 

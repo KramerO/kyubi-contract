@@ -13,6 +13,7 @@ export interface ApiVersion {
 export interface Capabilities {
   apps: string[];
   components: string[];
+  features?: string[];
   operations: string[];
 }
 
